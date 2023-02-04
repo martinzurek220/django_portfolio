@@ -1,0 +1,85 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+<h5>Ceny tokenů page</h4>
+
+    <div class="row">
+        <div class="col-3 left">
+            <section>
+                <br>
+                <span>Celková dolarová hodnota:</span><br>
+                <span class="vetsi_pismo"><b>15000 $</b></span><br>
+                <br>
+            </section>
+        </div>
+
+        <div class="col-3 middle-middle">
+            <section>
+                <br>
+                <br>
+                <br>
+                <br>
+            </section>
+        </div>
+
+        <div class="col-3 middle-middle">
+            <section>
+                <br>
+                <br>
+                <br>
+                <br>
+            </section>
+        </div>
+
+        <div class="col-3 rigth">
+            <section>
+                <br>
+                <br>
+                <br>
+                <br>
+            </section>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="middle">
+            <section>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>                  </th>
+                        <th>Název tokenu</th>
+                        <th>Dolarová hodnota</th>
+                        <th>Procenta</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                        {% block content_3 %}
+                            {% for muj_token in moje_tokeny %}
+                                <tr>
+                                    <td>
+                                        1
+                                    </td>
+                                    <td>
+                                        {{ muj_token.nazev }}
+                                    </td>
+                                    <td>
+                                        {{ muj_token.dolarova_hodnota }}
+                                    </td>
+                                    <td>
+                                        {{ muj_token.procenta }}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        {% endblock %}
+                    </tbody>
+                </table>
+            </section>
+        </div>
+    </div>
+
+
+
+{% endblock %}

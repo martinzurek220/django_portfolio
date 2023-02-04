@@ -1,0 +1,204 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<!--td, th-->
+
+<div class="container">
+
+
+    <h5>Přehled</h5>
+
+
+    <div class="row">
+        <div class="col-3 left">
+            <section class="size_4_dlazdice">
+
+                <span>Celková dolarová hodnota:</span><br>
+                <span class="vetsi_pismo"><b>{{ dolarova_hodnota }} $</b></span><br>
+
+            </section>
+        </div>
+
+        <div class="col-3 middle-middle">
+            <section class="size_4_dlazdice">
+
+            </section>
+        </div>
+
+        <div class="col-3 middle-middle">
+            <section class="size_4_dlazdice">
+
+            </section>
+        </div>
+
+        <div class="col-3 rigth">
+            <section class="size_4_dlazdice">
+
+            </section>
+        </div>
+    </div>
+
+
+    <div class="row">
+
+        <div class="col-6 left">
+            <section class="center">
+                <div id="chart" class="size_grafy"></div>
+
+                <script>
+                  var options = {
+                    chart: {
+                      type: 'line'
+
+                    },
+                    series: [{
+                      name: 'sales',
+                      data: [{% for value in values_line_chart %} '{{ value }}', {% endfor %}],
+                    }],
+                    xaxis: {
+                      categories: [{% for value in years_line_chart %} '{{ value }}', {% endfor %}],
+                    },
+                    title: {
+                        text: 'Graf vyvoje portfolia',
+                        align: 'left',
+                        margin: 10,
+                        offsetX: 0,
+                        offsetY: 0,
+                        floating: false,
+                        style: {
+                          fontSize:  '14px',
+                          fontWeight:  'bold',
+                          fontFamily:  undefined,
+                          color:  '#263238'
+                        },
+                    }
+                    }
+
+                  var chart = new ApexCharts(document.querySelector("#chart"), options);
+
+                  chart.render();
+                </script>
+            </section>
+        </div>
+
+        <div class="col-6 rigth">
+            <section class="center">
+
+                <div id="chart2" class="size_grafy"></div>
+
+                <script>
+                    var options = {
+
+                      <!-- series: [44, 55, 41, 17, 15, 1, 5, 6, 8, 7],-->
+                      <!-- U cisel nejsou uvozovky '' -->
+                      series: [{% for muj_token in moje_tokeny %} {{ muj_token.dolarova_hodnota }}, {% endfor %}],
+
+                      <!-- labels: ['Apple', 'Mango', 'Orange', 'Watermelon', 'a'],-->
+                      <!-- U textu jsou uvozovky '' -->
+                      labels: [{% for muj_token in moje_tokeny %} '{{ muj_token.nazev_tokenu }}', {% endfor %}],
+
+                      title: {
+                        text: 'Graf portfolia',
+                        align: 'left',
+                        margin: 10,
+                        offsetX: 0,
+                        offsetY: 0,
+                        floating: false,
+                        style: {
+                          fontSize:  '14px',
+                          fontWeight:  'bold',
+                          fontFamily:  undefined,
+                          color:  '#263238'
+                        },
+                      },
+
+                      chart: {
+                      type: 'donut',
+
+                      <!--Sirka grafu-->
+                      width: '86%',
+                    },
+                    responsive: [{
+                      breakpoint: 480,
+                      options: {
+                        chart: {
+                          width: 200
+                        },
+                        legend: {
+                          position: 'bottom'
+                        }
+                      }
+                    }]
+                    };
+
+                    var chart = new ApexCharts(document.querySelector("#chart2"), options);
+                    chart.render();
+                </script>
+            </section>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-6 left">
+            <section>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Pořadí</th>
+                        <th>Název tokenu</th>
+                        <th>Dolarová hodnota</th>
+                        <th>Procenta</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                        {% block content_3 %}
+                            {% for muj_token in moje_tokeny %}
+                                <tr>
+                                    <td>
+                                        {{ muj_token.poradi }}
+                                    </td>
+                                    <td>
+                                        {{ muj_token.nazev_tokenu }}
+                                    </td>
+                                    <td>
+                                        {{ muj_token.dolarova_hodnota }}
+                                    </td>
+                                    <td>
+                                        {{ muj_token.procenta }} %
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        {% endblock %}
+                    </tbody>
+                </table>
+            </section>
+        </div>
+
+        <div class="col-6 rigth">
+            <section>
+                Poznámky:<br>
+                <br>
+                <br>
+                <br>
+                <br>
+            </section>
+        </div>
+    </div>
+    <div>
+        <div class="middle">
+            <section>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+            </section>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
