@@ -3,6 +3,9 @@ from django.http import HttpResponse
 from viewer.models import *
 from django.views import View
 from django.views.generic import TemplateView, ListView
+from django.contrib.auth.forms import *
+from django.views import generic
+from django.urls import reverse_lazy
 
 # Create your views here.
 def hello(request):
@@ -91,4 +94,6 @@ def fast_api(request):
 def system(request):
     return render(request, 'system.html')
 
+def settings(request):
+    return render(request, 'settings.html')
 
