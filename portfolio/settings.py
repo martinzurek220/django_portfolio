@@ -39,10 +39,14 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_dump_load_utf8',
     'django_extensions',
+    'rest_framework',
+    'rest_framework.authtoken',
+
 
     # our applications
     'viewer',
     'accounts',
+    'api',
 ]
 
 MIDDLEWARE = [
@@ -143,3 +147,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Set redirect addresses after authentication
 LOGIN_REDIRECT_URL = 'prehled'
 LOGOUT_REDIRECT_URL = 'prehled'
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}

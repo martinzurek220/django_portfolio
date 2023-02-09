@@ -7,7 +7,7 @@
 
         <title>
             {% block title %}
-                Portfolio app
+                Portfolio tracker
             {% endblock %}
         </title>
 
@@ -36,7 +36,7 @@
                 <a class="navbar-brand" href="#">
                     <img src="https://getbootstrap.com/docs/5.3/assets/brand/bootstrap-logo.svg" alt="Logo" width="30"
                          height="24" class="d-inline-block align-text-top">
-                    Portfolio
+                    Portfolio tracker
                 </a>
                 <nav class="vetsi_pismo">
                     {% if request.user.is_authenticated %}
@@ -47,7 +47,7 @@
 <!--                    <a class="vetsi_pismo" href="{% url 'login' %}">Login</a>-->
                 </nav>
             </div>
-        </nav>dsadas
+        </nav>
 
         <div class="container">
             <ul class="nav">
@@ -75,11 +75,13 @@
               <li class="nav-item">
                 <a class="nav-link disabled">Disabled</a>
               </li>
+              {% comment %}
               {% if request.user.is_authenticated %}
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'settings' %}">Settings</a>
                 </li>
               {% endif %}
+              {% endcomment %}
             </ul>
         </div>
 

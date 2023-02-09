@@ -72,7 +72,16 @@ class PrehledView(View):
 
 
 def grafy(request):
-    return render(request, 'grafy.html')
+
+    labels = ['Blockchain', 'Cex']
+    values = [4000, 1000]
+
+    context = {
+        'labels': labels,
+        'values': values,
+    }
+
+    return render(request, 'grafy.html', context)
 
 # def staking(request):
 #     return render(request, 'staking.html')

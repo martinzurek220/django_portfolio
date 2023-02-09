@@ -16,8 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+import api.views
 from viewer.views import *
 from accounts.views import SignUpView
+
+from api.views import *
+
+from rest_framework import *
 
 from django.contrib.auth import views as auth_views
 
@@ -34,10 +39,14 @@ urlpatterns = [
     path('fast_api/', fast_api, name='fast_api'),
     path('system/', system, name='system'),
     path('staking/', staking, name='staking'),
-    path('settings/', settings, name='settings'),
+    # path('settings/', settings, name='settings'),
 
     # App accounts
     # path('accounts/', include('accounts.urls')),
     path('accounts/signup/', SignUpView.as_view(), name='signup'),  # signup
     path('accounts/', include('django.contrib.auth.urls')),  # login, logout, password_change,...
+
+    #App API
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    path('api/portfolio/', api.views.Portfolio.as_view({'get': 'list'})),
 ]
