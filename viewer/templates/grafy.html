@@ -13,7 +13,7 @@
                 <script>
                     var options = {
 
-                      <!-- series: [44, 55, 41, 17, 15, 1, 5, 6, 8, 7],-->
+<!--                       series: [44, 55, 41, 17, 15, 1, 5, 6, 8, 7],-->
                       <!-- U cisel nejsou uvozovky '' -->
                       series: [{% for value in values %} {{ value }}, {% endfor %}],
 
@@ -71,11 +71,11 @@
 
                       <!-- series: [44, 55, 41, 17, 15, 1, 5, 6, 8, 7],-->
                       <!-- U cisel nejsou uvozovky '' -->
-                      series: [{% for value in values %} {{ value }}, {% endfor %}],
+                      series: [{% for value in values_hodl %} {{ value }}, {% endfor %}],
 
                       <!-- labels: ['Apple', 'Mango', 'Orange', 'Watermelon', 'a'],-->
                       <!-- U textu jsou uvozovky '' -->
-                      labels: [{% for label in labels %} '{{ label }}', {% endfor %}],
+                      labels: [{% for label in labels_hodl %} '{{ label }}', {% endfor %}],
 
                       title: {
                         text: 'Graf portfolia',
@@ -187,7 +187,11 @@
         <div class="col-4 middle-middle">
 <!--            <section class="size_grafy_2">-->
             <section>
-
+                {% for jedna_polozka in rozdeleni_blockchain_cex %}
+                    {{ jedna_polozka.blockchain }}<br>
+                    {{ jedna_polozka.cex }}
+                {% endfor %}
+                [{% for value in values %} {{ value }}, {% endfor %}],
             </section>
         </div>
 

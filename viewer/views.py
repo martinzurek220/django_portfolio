@@ -73,12 +73,27 @@ class PrehledView(View):
 
 def grafy(request):
 
+    # Rozdeleni blockchain / cex
+    rozdeleni_blockchain_cex = RozdeleniBlockchainCex.objects.all()
+
     labels = ['Blockchain', 'Cex']
-    values = [4000, 1000]
+    # values = [4000, 1000]
+    values = [rozdeleni_blockchain_cex[0].blockchain, rozdeleni_blockchain_cex[0].cex]
+
+    # Rozdeleni hodl / staking / farming / stable
+
+    rozdeleni_hodl = RozdeleniHodlStakingFarmingStable.objects.all()
+
+    labels_hodl = ['Hodl', 'Staking', 'Farming', 'Stable']
+    values_hodl = [rozdeleni_hodl[0].hodl, rozdeleni_hodl[0].staking, rozdeleni_hodl[0].farming,
+                   rozdeleni_hodl[0].stable_coin]
 
     context = {
         'labels': labels,
         'values': values,
+        'labels_hodl': labels_hodl,
+        'values_hodl': values_hodl,
+        'rozdeleni': rozdeleni_blockchain_cex,
     }
 
     return render(request, 'grafy.html', context)
@@ -105,7 +120,4 @@ def system(request):
 
 def settings(request):
     return render(request, 'settings.html')
-
-def test():
-    pass
 
