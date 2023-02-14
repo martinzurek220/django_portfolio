@@ -1,0 +1,204 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h5>Další rozdělení page</h5>
+
+    <div class="row">
+        <div class="col-4 left">
+            <section>
+<!--                <div id="chart1" class="size_grafy"></div>-->
+                <div id="chart1"></div>
+
+                <script>
+                    var options = {
+
+                      <!-- series: [44, 55, 41, 17, 15, 1, 5, 6, 8, 7],-->
+                      <!-- U cisel nejsou uvozovky '' -->
+                      series: [{% for value in values %} {{ value }}, {% endfor %}],
+
+                      <!-- labels: ['Apple', 'Mango', 'Orange', 'Watermelon', 'a'],-->
+                      <!-- U textu jsou uvozovky '' -->
+                      labels: [{% for label in labels %} '{{ label }}', {% endfor %}],
+
+                      title: {
+                        text: 'Graf portfolia',
+                        align: 'left',
+                        margin: 10,
+                        offsetX: 0,
+                        offsetY: 0,
+                        floating: false,
+                        style: {
+                          fontSize:  '14px',
+                          fontWeight:  'bold',
+                          fontFamily:  undefined,
+                          color:  '#263238'
+                        },
+                      },
+
+                      chart: {
+                      type: 'donut',
+
+                      <!--Sirka grafu-->
+                      width: '90%',
+                    },
+                    responsive: [{
+                      breakpoint: 480,
+                      options: {
+                        chart: {
+                          width: 200
+                        },
+                        legend: {
+                          position: 'bottom'
+                        }
+                      }
+                    }]
+                    };
+
+                    var chart = new ApexCharts(document.querySelector("#chart1"), options);
+                    chart.render();
+                </script>
+            </section>
+        </div>
+
+        <div class="col-4 middle-middle">
+            <section>
+<!--                <div id="chart2" class="size_grafy"></div>-->
+                <div id="chart2"></div>
+
+                <script>
+                    var options = {
+
+                      <!-- series: [44, 55, 41, 17, 15, 1, 5, 6, 8, 7],-->
+                      <!-- U cisel nejsou uvozovky '' -->
+                      series: [{% for value in values %} {{ value }}, {% endfor %}],
+
+                      <!-- labels: ['Apple', 'Mango', 'Orange', 'Watermelon', 'a'],-->
+                      <!-- U textu jsou uvozovky '' -->
+                      labels: [{% for label in labels %} '{{ label }}', {% endfor %}],
+
+                      title: {
+                        text: 'Graf portfolia',
+                        align: 'left',
+                        margin: 10,
+                        offsetX: 0,
+                        offsetY: 0,
+                        floating: false,
+                        style: {
+                          fontSize:  '14px',
+                          fontWeight:  'bold',
+                          fontFamily:  undefined,
+                          color:  '#263238'
+                        },
+                      },
+
+                      chart: {
+                      type: 'donut',
+
+                      <!--Sirka grafu-->
+                      width: '90%',
+                    },
+                    responsive: [{
+                      breakpoint: 480,
+                      options: {
+                        chart: {
+                          width: 200
+                        },
+                        legend: {
+                          position: 'bottom'
+                        }
+                      }
+                    }]
+                    };
+
+                    var chart = new ApexCharts(document.querySelector("#chart2"), options);
+                    chart.render();
+                </script>
+            </section>
+        </div>
+
+        <div class="col-4 rigth">
+            <section>
+<!--                <div id="chart3" class="size_grafy"></div>-->
+                <div id="chart3"></div>
+
+                <script>
+                    var options = {
+
+                      <!-- series: [44, 55, 41, 17, 15, 1, 5, 6, 8, 7],-->
+                      <!-- U cisel nejsou uvozovky '' -->
+                      series: [{% for value in values %} {{ value }}, {% endfor %}],
+
+                      <!-- labels: ['Apple', 'Mango', 'Orange', 'Watermelon', 'a'],-->
+                      <!-- U textu jsou uvozovky '' -->
+                      labels: [{% for label in labels %} '{{ label }}', {% endfor %}],
+
+                      title: {
+                        text: 'Graf portfolia',
+                        align: 'left',
+                        margin: 10,
+                        offsetX: 0,
+                        offsetY: 0,
+                        floating: false,
+                        style: {
+                          fontSize:  '14px',
+                          fontWeight:  'bold',
+                          fontFamily:  undefined,
+                          color:  '#263238'
+                        },
+                      },
+
+                      chart: {
+                      type: 'donut',
+
+                      <!--Sirka grafu-->
+                      width: '90%',
+                    },
+                    responsive: [{
+                      breakpoint: 480,
+                      options: {
+                        chart: {
+                          width: 200
+                        },
+                        legend: {
+                          position: 'bottom'
+                        }
+                      }
+                    }]
+                    };
+
+                    var chart = new ApexCharts(document.querySelector("#chart3"), options);
+                    chart.render();
+                </script>
+            </section>
+        </div>
+
+        <div class="row">
+        <div class="col-4 left">
+<!--            <section class="size_grafy_2">-->
+            <section>
+
+                <span>Celková dolarová hodnota:</span><br>
+                <span class="vetsi_pismo"><b>{{ dolarova_hodnota }} $</b></span><br>
+
+            </section>
+        </div>
+
+        <div class="col-4 middle-middle">
+<!--            <section class="size_grafy_2">-->
+            <section>
+
+            </section>
+        </div>
+
+        <div class="col-4 rigth">
+<!--            <section class="size_grafy_2">-->
+            <section>
+
+            </section>
+        </div>
+    </div>
+
+    </div>
+
+{% endblock %}
