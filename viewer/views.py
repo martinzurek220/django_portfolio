@@ -106,3 +106,6 @@ def system(request):
 def settings(request):
     return render(request, 'settings.html')
 
+def test():
+    pass
+
