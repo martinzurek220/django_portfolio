@@ -61,14 +61,11 @@ class PrehledView(View):
         years_line_chart = [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 2050]
         values_line_chart = [30, 40, 35, 50, 49, 60, 70, 91, 60]
 
-        tokeny = [[1, "BTC", 1000, 30], [2, "ETH", 1500, 20], [3, "ATOM", 2500, 35], [4, "SOL", 5000, 45]]
-
         context = {
             'my_tokens': my_tokens,
             'years_line_chart': years_line_chart,
             'values_line_chart': values_line_chart,
             'dollar_value': dollar_value,
-            'tokeny': tokeny,
         }
 
         return render(request, 'index.html', context)
