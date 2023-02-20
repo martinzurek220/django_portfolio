@@ -14,7 +14,7 @@
             <section class="size_4_dlazdice">
 
                 <span>Celková dolarová hodnota:</span><br>
-                <span class="vetsi_pismo"><b>{{ dolarova_hodnota }} $</b></span><br>
+                <span class="vetsi_pismo"><b>{{ dollar_value }} $</b></span><br>
 
             </section>
         </div>
@@ -91,11 +91,11 @@
 
                       <!-- series: [44, 55, 41, 17, 15, 1, 5, 6, 8, 7],-->
                       <!-- U cisel nejsou uvozovky '' -->
-                      series: [{% for muj_token in moje_tokeny %} {{ muj_token.dolarova_hodnota }}, {% endfor %}],
+                      series: [{% for my_token in my_tokens %} {{ my_token.dollar_value }}, {% endfor %}],
 
                       <!-- labels: ['Apple', 'Mango', 'Orange', 'Watermelon', 'a'],-->
                       <!-- U textu jsou uvozovky '' -->
-                      labels: [{% for muj_token in moje_tokeny %} '{{ muj_token.nazev_tokenu }}', {% endfor %}],
+                      labels: [{% for my_token in my_tokens %} '{{ my_token.name }}', {% endfor %}],
 
                       title: {
                         text: 'Graf portfolia',
@@ -154,21 +154,21 @@
 
                     <tbody>
                         {% block content_3 %}
-                            {% for muj_token in moje_tokeny %}
-                                <tr>
-                                    <td>
-                                        {{ muj_token.poradi }}
-                                    </td>
-                                    <td>
-                                        {{ muj_token.nazev_tokenu }}
-                                    </td>
-                                    <td>
-                                        {{ muj_token.dolarova_hodnota }}
-                                    </td>
-                                    <td>
-                                        {{ muj_token.procenta }} %
-                                    </td>
-                                </tr>
+                            {% for token in tokeny %}
+                                    <tr>
+                                        <td>
+                                            {{ token.0 }}
+                                        </td>
+                                        <td>
+                                            {{ token.1 }}
+                                        </td>
+                                        <td>
+                                            {{ token.2 }}
+                                        </td>
+                                        <td>
+                                            {{ token.3 }}
+                                        </td>
+                                    </tr>
                             {% endfor %}
                         {% endblock %}
                     </tbody>

@@ -16,11 +16,11 @@ def hello(request):
 #
 #     labels = []
 #     count = 0
-#     for muj_token in moje_tokeny:
-#         labels.append(muj_token.nazev_tokenu)
+#     for my_token in moje_tokeny:
+#         labels.append my_token.nazev_tokenu)
 #
 #         count += 1
-#         muj_token.poradi = count
+#         my_token.poradi = count
 #
 #     # labels = ['a', 'b', 'c', 'd', 'e']
 #     # values = [10, 10, 10, 10, 10, 10, 10, 10, 10, 10]
@@ -41,31 +41,34 @@ class PrehledView(View):
 
     def get(self, request):
 
-        moje_tokeny = Portfolio.objects.all()  # Vytvori list objektu [obj1, obj2, obj3, ...]
+        my_tokens = Portfolio.objects.all()  # Vytvori list objektu [obj1, obj2, obj3, ...]
 
         count = 0
-        dolarova_hodnota = 0
+        dollar_value = 0
 
         # Pridani poradi a vypocitani dolarove hodnoty
-        for muj_token in moje_tokeny:
+        for my_token in my_tokens:
 
             count += 1
-            muj_token.poradi = count
+            my_token.count = count
 
-            dolarova_hodnota += muj_token.dolarova_hodnota
+            dollar_value += my_token.dollar_value
 
         # Vypocet procent
-        for muj_token in moje_tokeny:
-            muj_token.procenta = round(((100 * muj_token.dolarova_hodnota) / dolarova_hodnota), 1)
+        for my_token in my_tokens:
+         my_token.percentages = round(((100 * my_token.dollar_value) / dollar_value), 1)
 
         years_line_chart = [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 2050]
         values_line_chart = [30, 40, 35, 50, 49, 60, 70, 91, 60]
 
+        tokeny = [[1, "BTC", 1000, 30], [2, "ETH", 1500, 20], [3, "ATOM", 2500, 35], [4, "SOL", 5000, 45]]
+
         context = {
-            'moje_tokeny': moje_tokeny,
+            'my_tokens': my_tokens,
             'years_line_chart': years_line_chart,
             'values_line_chart': values_line_chart,
-            'dolarova_hodnota': dolarova_hodnota,
+            'dollar_value': dollar_value,
+            'tokeny': tokeny,
         }
 
         return render(request, 'index.html', context)

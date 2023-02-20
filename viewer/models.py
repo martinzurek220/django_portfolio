@@ -6,13 +6,14 @@ from django.contrib.auth.models import User
 
 class Portfolio(Model):
     poradi = 0
-    nazev_tokenu = CharField(max_length=16)
-    dolarova_hodnota = IntegerField(null=False)
+    name = CharField(max_length=16)
+    amount = CharField(max_length=16)
+    dollar_value = IntegerField(null=False)
     procenta = 0
 
     class Meta:
-        db_table = 'moje_tokeny'
-        ordering = ['-dolarova_hodnota', 'nazev_tokenu']
+        db_table = 'moje_tokeny_2'
+        ordering = ['-dollar_value', 'name']
 
 
 class RozdeleniBlockchainCex(Model):
