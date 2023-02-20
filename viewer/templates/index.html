@@ -154,21 +154,24 @@
 
                     <tbody>
                         {% block content_3 %}
-                            {% for token in tokeny %}
-                                    <tr>
-                                        <td>
-                                            {{ token.0 }}
-                                        </td>
-                                        <td>
-                                            {{ token.1 }}
-                                        </td>
-                                        <td>
-                                            {{ token.2 }}
-                                        </td>
-                                        <td>
-                                            {{ token.3 }}
-                                        </td>
-                                    </tr>
+                            {% for my_token in my_tokens %}
+                                <tr>
+                                    <td>
+                                        {{ my_token.count }}
+                                    </td>
+                                    <td>
+                                        {{ my_token.name }}
+                                    </td>
+                                    <td>
+                                        {{ my_token.amount }}
+                                    </td>
+                                    <td>
+                                        {{ my_token.dollar_value }}
+                                    </td>
+                                    <td>
+                                        {{ my_token.percentages }}
+                                    </td>
+                                </tr>
                             {% endfor %}
                         {% endblock %}
                     </tbody>
