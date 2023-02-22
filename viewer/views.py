@@ -41,7 +41,12 @@ class PrehledView(View):
 
     def get(self, request):
 
-        my_tokens = Portfolio.objects.all()  # Vytvori list objektu [obj1, obj2, obj3, ...]
+        if request.user.is_authenticated:
+            my_tokens = Portfolio_assets.objects.filter(user=request.user)  # Vytvori list objektu [obj1, obj2, obj3, ...]
+
+        else:
+            # Neprihlasi se, ale jen vytahne data od uzivatele demo
+            my_tokens = Portfolio_assets.objects.filter(user=User.objects.get(username="demo"))
 
         count = 0
         dollar_value = 0
@@ -56,7 +61,7 @@ class PrehledView(View):
 
         # Vypocet procent
         for my_token in my_tokens:
-         my_token.percentages = round(((100 * my_token.dollar_value) / dollar_value), 1)
+            my_token.percentages = round(((100 * my_token.dollar_value) / dollar_value), 1)
 
         years_line_chart = [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 2050]
         values_line_chart = [30, 40, 35, 50, 49, 60, 70, 91, 60]
@@ -74,7 +79,7 @@ class PrehledView(View):
 def grafy(request):
 
     # Rozdeleni blockchain / cex
-    rozdeleni_blockchain_cex = RozdeleniBlockchainCex.objects.all()
+    rozdeleni_blockchain_cex = Blockchain_Cex_assets.objects.all()
 
     labels = ['Blockchain', 'Cex']
     # values = [4000, 1000]
@@ -82,7 +87,7 @@ def grafy(request):
 
     # Rozdeleni hodl / staking / farming / stable
 
-    rozdeleni_hodl = RozdeleniHodlStakingFarmingStable.objects.all()
+    rozdeleni_hodl = Hodl_Staking_Farming_Stable_assets.objects.all()
 
     labels_hodl = ['Hodl', 'Staking', 'Farming', 'Stable']
     values_hodl = [rozdeleni_hodl[0].hodl, rozdeleni_hodl[0].staking, rozdeleni_hodl[0].farming,
@@ -98,11 +103,8 @@ def grafy(request):
 
     return render(request, 'grafy.html', context)
 
-# def staking(request):
-#     return render(request, 'staking.html')
-
 def staking(request):
-    data = Portfolio.objects.all()
+    data = Portfolio_assets.objects.all()
     context = {'data': data}
     return render(request, 'staking.html', context)
 
