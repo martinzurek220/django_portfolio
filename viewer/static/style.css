@@ -99,20 +99,28 @@ a.nav-link {
 
 /*#chart {
     max-width: 500px;
-    margin: 35px auto;
-}*/
+    margin: auto auto;
+}
 
 #chart2 {
     max-width: 500px;
-    /*margin: 35px auto;*/
+    margin: auto auto;
 }
 
 #chart3 {
     max-width: 500px;
-    /*margin: 35px auto;*/
-}
+    *//*margin: 35px auto;*//**//*
+}*/
 
 .center {
-    align: center;
+    padding: auto auto
 }
 
+script {
+    margin-left: 30px;
+}
+
+span.link {
+    text-align: right;
+    color: #0d6efd;
+}
