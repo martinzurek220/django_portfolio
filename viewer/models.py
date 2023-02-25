@@ -23,27 +23,42 @@ class Portfolio_assets(Model):
 
 
 class Blockchain_Cex_assets(Model):
-    user_id = IntegerField(null=False)
+    user = ForeignKey(User, null=True, on_delete=SET_NULL)
     date_and_time = DateTimeField()
     division = CharField(max_length=25, null=True)
     name = CharField(max_length=16, null=True)
     amount = FloatField()
     dollar_value = FloatField()
 
-    # class Meta:
-    #     db_table = 'rozdeleni_blockchain_cex'
+    class Meta:
+        # db_table = 'rozdeleni_blockchain_cex'
+        ordering = ['-dollar_value', 'name']
 
 
 class Hodl_Staking_Farming_Stable_assets(Model):
-    user_id = IntegerField(null=False)
+    user = ForeignKey(User, null=True, on_delete=SET_NULL)
     date_and_time = DateTimeField()
     division = CharField(max_length=25, null=True)
     name = CharField(max_length=16, null=True)
     amount = FloatField()
     dollar_value = FloatField()
 
-    # class Meta:
-    #     db_table = 'rozdeleni_hodl_staking_farming_stable'
+    class Meta:
+        # db_table = 'rozdeleni_hodl_staking_farming_stable'
+        ordering = ['-dollar_value', 'name']
+
+
+class Networks(Model):
+    user = ForeignKey(User, null=True, on_delete=SET_NULL)
+    date_and_time = DateTimeField()
+    division = CharField(max_length=25, null=True)
+    name = CharField(max_length=16, null=True)
+    amount = FloatField()
+    dollar_value = FloatField()
+
+    class Meta:
+        # db_table = 'rozdeleni_hodl_staking_farming_stable'
+        ordering = ['-dollar_value', 'name']
 
 
 class Dollar_value(Model):

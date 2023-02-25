@@ -124,3 +124,7 @@ span.link {
     text-align: right;
     color: #0d6efd;
 }
+
+.vycentruj {
+    margin: auto auto
+}

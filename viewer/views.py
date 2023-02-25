@@ -98,49 +98,47 @@ def grafy(request):
 
     return render(request, 'grafy_grafy.html', context)
 
+
 def grafy_tabulky(request):
 
-    # # Rozdeleni blockchain / cex
-    # rozdeleni_blockchain_cex = Blockchain_Cex_assets.objects.all()
-    #
-    # labels = ['Blockchain', 'Cex']
-    # # values = [4000, 1000]
-    # values = [rozdeleni_blockchain_cex[0].blockchain, rozdeleni_blockchain_cex[0].cex]
-    #
-    # # Rozdeleni hodl / staking / farming / stable
-    #
-    # rozdeleni_hodl = Hodl_Staking_Farming_Stable_assets.objects.all()
-    #
-    # labels_hodl = ['Hodl', 'Staking', 'Farming', 'Stable']
-    # values_hodl = [rozdeleni_hodl[0].hodl, rozdeleni_hodl[0].staking, rozdeleni_hodl[0].farming,
-    #                rozdeleni_hodl[0].stable_coin]
-    #
-    # context = {
-    #     'labels': labels,
-    #     'values': values,
-    #     'labels_hodl': labels_hodl,
-    #     'values_hodl': values_hodl,
-    #     'rozdeleni': rozdeleni_blockchain_cex,
-    # }
+    if request.user.is_authenticated:
+        blockchain = Blockchain_Cex_assets.objects.filter(division='Blockchain').filter(user=request.user)
+        cex = Blockchain_Cex_assets.objects.filter(division='Cex').filter(user=request.user)
+    else:
+        blockchain = Blockchain_Cex_assets.objects.filter(division='Blockchain')\
+            .filter(user=User.objects.get(username="demo"))
+        cex = Blockchain_Cex_assets.objects.filter(division='Cex')\
+            .filter(user=User.objects.get(username="demo"))
 
-    return render(request, 'grafy_tabulky.html')
+    context = {
+        'blockchain': blockchain,
+        'cex': cex,
+    }
+
+    return render(request, 'grafy_tabulky.html', context)
+
 
 def staking(request):
     data = Portfolio_assets.objects.all()
     context = {'data': data}
     return render(request, 'staking.html', context)
 
+
 def farmy(request):
     return render(request, 'farmy.html')
+
 
 def ceny_tokenu(request):
     return render(request, 'ceny_tokenu.html')
 
+
 def fast_api(request):
     return render(request, 'fast_api.html')
 
+
 def system(request):
     return render(request, 'system.html')
+
 
 def settings(request):
     return render(request, 'settings.html')
