@@ -77,11 +77,6 @@ span {
     box-sizing: border-box;
 }
 
-
-p {
-    color: blue;
-}
-
 section {
     padding: 0.8rem;
     border-radius: 0.3rem;
@@ -127,4 +122,9 @@ span.link {
 
 .vycentruj {
     margin: auto auto
+}
+
+.nazev_tabulky {
+    padding: 0rem;
+    margin: 1.5rem 0rem 0.5rem 0rem;
 }
