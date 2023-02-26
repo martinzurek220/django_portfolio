@@ -48,7 +48,7 @@ class Hodl_Staking_Farming_Stable_assets(Model):
         ordering = ['-dollar_value', 'name']
 
 
-class Networks(Model):
+class Networks_assets(Model):
     user = ForeignKey(User, null=True, on_delete=SET_NULL)
     date_and_time = DateTimeField()
     division = CharField(max_length=25, null=True)
@@ -58,7 +58,7 @@ class Networks(Model):
 
     class Meta:
         # db_table = 'rozdeleni_hodl_staking_farming_stable'
-        ordering = ['-dollar_value', 'name']
+        ordering = ['division']
 
 
 class Dollar_value(Model):

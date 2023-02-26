@@ -11,6 +11,12 @@
     </div>
 
     <div class="row">
+        <span>
+            Prostor pro degug  # TODO SMAZAT !!!
+        </span>
+    </div>
+
+    <div class="row">
         <div class="col-6 vycentruj">
             <p class="nazev_tabulky">
                 Blockchain assets:
@@ -156,5 +162,58 @@
             </section>
         </div>
     </div>
+
+    {% block content_grafy_tabulky_4 %}
+        {% for network in listt %}
+            <div class="row">
+                <div class="col-6 vycentruj">
+                    <p class="nazev_tabulky">
+                            {{ network.0.division }} assets
+                    </p>
+                </div>
+            </div>
+
+             <div class="row">
+                <div class="col-6 vycentruj">
+                    <section class="center">
+
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>Rozdělení</th>
+                                <th>Množství</th>
+                                <th>Dolarová hodnota</th>
+                                <th>Procenta</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                               {% block content_grafy_tabulky_5 %}
+                                    {% for value in network %}
+                                        <tr>
+                                            <td>
+                                                {{ value.name }}
+                                            </td>
+                                            <td>
+                                                {{ value.amount }}
+                                            </td>
+                                            <td>
+                                                {{ value.dollar_value }}
+                                            </td>
+                                            <td>
+                                                0
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                {% endblock %}
+                            </tbody>
+                        </table>
+
+                    </section>
+                </div>
+            </div>
+
+        {% endfor %}
+    {% endblock %}
 
 {% endblock %}
