@@ -16,103 +16,57 @@
         </span>
     </div>
 
-    <div class="row">
-        <div class="col-6 vycentruj">
-            <p class="nazev_tabulky">
-                Blockchain assets:
-            </p>
-        </div>
-    </div>
+    {% block content_grafy_tabulky_1 %}
+        {% for category in sorted_blockchain_cex %}
+            <div class="row">
+                <div class="col-6 vycentruj">
+                    <p class="nazev_tabulky">
+                            {{ category.0.division }} assets:
+                    </p>
+                </div>
+            </div>
 
-    <div class="row">
+             <div class="row">
+                <div class="col-6 vycentruj">
+                    <section class="center">
 
-        <div class="col-6 vycentruj">
-            <section class="center">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>Rozdělení</th>
+                                <th>Množství</th>
+                                <th>Dolarová hodnota</th>
+                                <th>Procenta</th>
+                            </tr>
+                            </thead>
 
-                <table class="table table-striped">
-                    <thead>
-                    <tr>
-                        <th>Rozdělení</th>
-                        <th>Množství</th>
-                        <th>Dolarová hodnota</th>
-                        <th>Procenta</th>
-                    </tr>
-                    </thead>
+                            <tbody>
+                               {% block content_grafy_tabulky_2 %}
+                                    {% for value in category %}
+                                        <tr>
+                                            <td>
+                                                {{ value.name }}
+                                            </td>
+                                            <td>
+                                                {{ value.amount }}
+                                            </td>
+                                            <td>
+                                                {{ value.dollar_value }}
+                                            </td>
+                                            <td>
+                                                0
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                {% endblock %}
+                            </tbody>
+                        </table>
+                    </section>
+                </div>
+            </div>
+        {% endfor %}
+    {% endblock %}
 
-                    <tbody>
-                       {% block content_grafy_tabulky_1 %}
-                            {% for value in blockchain %}
-                                <tr>
-                                    <td>
-                                        {{ value.name }}
-                                    </td>
-                                    <td>
-                                        {{ value.amount }}
-                                    </td>
-                                    <td>
-                                        {{ value.dollar_value }}
-                                    </td>
-                                    <td>
-                                        0
-                                    </td>
-                                </tr>
-                            {% endfor %}
-                        {% endblock %}
-                    </tbody>
-                </table>
-
-            </section>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-6 vycentruj">
-            <p class="nazev_tabulky">
-                Cex assets:
-            </p>
-        </div>
-    </div>
-
-    <div class="row">
-
-        <div class="col-6 vycentruj">
-            <section class="center">
-
-                <table class="table table-striped">
-                    <thead>
-                    <tr>
-                        <th>Rozdělení</th>
-                        <th>Množství</th>
-                        <th>Dolarová hodnota</th>
-                        <th>Procenta</th>
-                    </tr>
-                    </thead>
-
-                    <tbody>
-                       {% block content_grafy_tabulky_2 %}
-                            {% for value in cex %}
-                                <tr>
-                                    <td>
-                                        {{ value.name }}
-                                    </td>
-                                    <td>
-                                        {{ value.amount }}
-                                    </td>
-                                    <td>
-                                        {{ value.dollar_value }}
-                                    </td>
-                                    <td>
-                                        0
-                                    </td>
-                                </tr>
-                            {% endfor %}
-                        {% endblock %}
-                    </tbody>
-                </table>
-
-            </section>
-        </div>
-    </div>
 
     {% block content_grafy_tabulky_3 %}
         {% for category in sorted_hodl_staking_farming_stable_assets %}
