@@ -103,7 +103,6 @@ def grafy_tabulky(request):
 
     network_name = []
     sorted_networks_assets = []
-    listt = []
 
     if request.user.is_authenticated:
         blockchain = Blockchain_Cex_assets.objects.filter(division='Blockchain').filter(user=request.user)
@@ -122,21 +121,21 @@ def grafy_tabulky(request):
             network_name.append(network.division)
 
     for i in range(len(network_name)):
-        listt.append([])
+        sorted_networks_assets.append([])
 
     for network in networks:
         for i in range(len(network_name)):
             if network.division == network_name[i]:
-                listt[i].append(network)
+                sorted_networks_assets[i].append(network)
 
-    print(listt)
+    print(sorted_networks_assets)
 
     context = {
         'blockchain': blockchain,
         'cex': cex,
         'networks': networks,
         'network_name': network_name,
-        'listt': listt,
+        'sorted_networks_assets': sorted_networks_assets,
     }
 
     return render(request, 'grafy_tabulky.html', context)
