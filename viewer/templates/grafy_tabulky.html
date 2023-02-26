@@ -114,61 +114,12 @@
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-6 vycentruj">
-            <p class="nazev_tabulky">
-                    Hodl assets:
-            </p>
-        </div>
-    </div>
-
-    <div class="row">
-
-        <div class="col-6 vycentruj">
-            <section class="center">
-
-                <table class="table table-striped">
-                    <thead>
-                    <tr>
-                        <th>Rozdělení</th>
-                        <th>Množství</th>
-                        <th>Dolarová hodnota</th>
-                        <th>Procenta</th>
-                    </tr>
-                    </thead>
-
-                    <tbody>
-                       {% block content_grafy_tabulky_3 %}
-                            {% for value in cex %}
-                                <tr>
-                                    <td>
-                                        {{ value.name }}
-                                    </td>
-                                    <td>
-                                        {{ value.amount }}
-                                    </td>
-                                    <td>
-                                        {{ value.dollar_value }}
-                                    </td>
-                                    <td>
-                                        0
-                                    </td>
-                                </tr>
-                            {% endfor %}
-                        {% endblock %}
-                    </tbody>
-                </table>
-
-            </section>
-        </div>
-    </div>
-
-    {% block content_grafy_tabulky_4 %}
-        {% for network in sorted_networks_assets %}
+    {% block content_grafy_tabulky_3 %}
+        {% for category in sorted_hodl_staking_farming_stable_assets %}
             <div class="row">
                 <div class="col-6 vycentruj">
                     <p class="nazev_tabulky">
-                            {{ network.0.division }} assets
+                            {{ category.0.division }} assets:
                     </p>
                 </div>
             </div>
@@ -188,7 +139,58 @@
                             </thead>
 
                             <tbody>
-                               {% block content_grafy_tabulky_5 %}
+                               {% block content_grafy_tabulky_4 %}
+                                    {% for value in category %}
+                                        <tr>
+                                            <td>
+                                                {{ value.name }}
+                                            </td>
+                                            <td>
+                                                {{ value.amount }}
+                                            </td>
+                                            <td>
+                                                {{ value.dollar_value }}
+                                            </td>
+                                            <td>
+                                                0
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                {% endblock %}
+                            </tbody>
+                        </table>
+                    </section>
+                </div>
+            </div>
+        {% endfor %}
+    {% endblock %}
+
+    {% block content_grafy_tabulky_5 %}
+        {% for network in sorted_networks_assets %}
+            <div class="row">
+                <div class="col-6 vycentruj">
+                    <p class="nazev_tabulky">
+                            {{ network.0.division }} assets:
+                    </p>
+                </div>
+            </div>
+
+             <div class="row">
+                <div class="col-6 vycentruj">
+                    <section class="center">
+
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>Rozdělení</th>
+                                <th>Množství</th>
+                                <th>Dolarová hodnota</th>
+                                <th>Procenta</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                               {% block content_grafy_tabulky_6 %}
                                     {% for value in network %}
                                         <tr>
                                             <td>
@@ -208,11 +210,9 @@
                                 {% endblock %}
                             </tbody>
                         </table>
-
                     </section>
                 </div>
             </div>
-
         {% endfor %}
     {% endblock %}
 

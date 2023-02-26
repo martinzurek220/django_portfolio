@@ -86,7 +86,7 @@ def grafy(request):
     else:
         blockchain_cex = Dollar_value.objects.filter(category='blockchain_cex')\
             .filter(user=User.objects.get(username="demo"))
-        hodl_staking_farming_stable = Dollar_value.objects.filter(category='hodl_staking_farming_stable') \
+        hodl_staking_farming_stable = Dollar_value.objects.filter(category='hodl_staking_farming_stable')\
             .filter(user=User.objects.get(username="demo"))
         networks = Dollar_value.objects.filter(category='network').filter(user=User.objects.get(username="demo"))
 
@@ -102,19 +102,36 @@ def grafy(request):
 def grafy_tabulky(request):
 
     network_name = []
+    category_name = []
+    sorted_hodl_staking_farming_stable_assets = []
     sorted_networks_assets = []
 
     if request.user.is_authenticated:
         blockchain = Blockchain_Cex_assets.objects.filter(division='Blockchain').filter(user=request.user)
         cex = Blockchain_Cex_assets.objects.filter(division='Cex').filter(user=request.user)
+        hodl_staking_farming_stable = Hodl_Staking_Farming_Stable_assets.objects.all().filter(user=request.user)
         networks = Networks_assets.objects.all().filter(user=request.user)
     else:
         blockchain = Blockchain_Cex_assets.objects.filter(division='Blockchain')\
             .filter(user=User.objects.get(username="demo"))
         cex = Blockchain_Cex_assets.objects.filter(division='Cex')\
             .filter(user=User.objects.get(username="demo"))
+        hodl_staking_farming_stable = Hodl_Staking_Farming_Stable_assets.objects.all() \
+            .filter(user=User.objects.get(username="demo"))
         networks = Networks_assets.objects.all()\
             .filter(user=User.objects.get(username="demo"))
+
+    for category in hodl_staking_farming_stable:
+        if category.division not in category_name:
+            category_name.append(category.division)
+
+    for i in range(len(category_name)):
+        sorted_hodl_staking_farming_stable_assets.append([])
+
+    for category in hodl_staking_farming_stable:
+        for i in range(len(category_name)):
+            if category.division == category_name[i]:
+                sorted_hodl_staking_farming_stable_assets[i].append(category)
 
     for network in networks:
         if network.division not in network_name:
@@ -133,8 +150,7 @@ def grafy_tabulky(request):
     context = {
         'blockchain': blockchain,
         'cex': cex,
-        'networks': networks,
-        'network_name': network_name,
+        'sorted_hodl_staking_farming_stable_assets': sorted_hodl_staking_farming_stable_assets,
         'sorted_networks_assets': sorted_networks_assets,
     }
 
