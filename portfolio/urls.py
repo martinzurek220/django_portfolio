@@ -33,6 +33,7 @@ urlpatterns = [
     # path('', prehled, name='prehled'),
     path('', PrehledView.as_view(), name='prehled'),
     path('grafy/', grafy, name='grafy'),
+    path('grafy/tabulky/', grafy_tabulky, name='grafy_tabulky'),
     # path('staking/', staking, name='staking'),
     path('farmy/', farmy, name='farmy'),
     path('ceny_tokenu/', ceny_tokenu, name='ceny_tokenu'),
