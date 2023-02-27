@@ -1,0 +1,292 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h5>Grafy</h5>
+
+    <div class="row">
+        <span class="link">
+            <a class="nav-link" href="{% url 'grafy_tabulky' %}">Tabulky</a>
+        </span>
+    </div>
+
+    <div class="row">
+
+        <div class="col-6 left">
+            <section class="center">
+                <div id="chart_grafy_1" class="size_grafy"></div>
+
+                <script>
+                    var options = {
+
+                      <!-- series: [3000, 1000],-->
+                      <!-- U cisel nejsou uvozovky '' -->
+                      series: [{% for value in blockchain_cex %} {{ value.dollar_value }}, {% endfor %}],
+
+                      <!-- labels: ['Blockchain', 'Cex'],-->
+                      <!-- U textu jsou uvozovky '' -->
+                      labels: [{% for value in blockchain_cex %} '{{ value.division }}', {% endfor %}],
+
+                      title: {
+                        text: 'Graf blockchain / cex',
+                        align: 'left',
+                        margin: 10,
+                        offsetX: 0,
+                        offsetY: 0,
+                        floating: false,
+                        style: {
+                          fontSize:  '14px',
+                          fontWeight:  'bold',
+                          fontFamily:  undefined,
+                          color:  '#263238'
+                        },
+                      },
+
+                      chart: {
+                      type: 'donut',
+
+                      <!--Sirka grafu-->
+                      width: '86%',
+                    },
+                    responsive: [{
+                      breakpoint: 480,
+                      options: {
+                        chart: {
+                          width: 200
+                        },
+                        legend: {
+                          position: 'bottom'
+                        }
+                      }
+                    }]
+                    };
+
+                    var chart = new ApexCharts(document.querySelector("#chart_grafy_1"), options);
+                    chart.render();
+                </script>
+            </section>
+        </div>
+
+        <div class="col-6 rigth">
+            <section class="center">
+
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Rozdělení</th>
+                        <th>Dolarová hodnota</th>
+                        <th>Procenta</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                       {% block content_grafy_1 %}
+                            {% for value in blockchain_cex %}
+                                <tr>
+                                    <td>
+                                        {{ value.division }}
+                                    </td>
+                                    <td>
+                                        {{ value.dollar_value }}
+                                    </td>
+                                    <td>
+                                        0
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        {% endblock %}
+                    </tbody>
+                </table>
+
+            </section>
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-6 left">
+            <section class="center">
+                <div id="chart_grafy_2" class="size_grafy"></div>
+
+                <script>
+                    var options = {
+
+                      <!-- series: [1500, 1000, 500, 1000],-->
+                      <!-- U cisel nejsou uvozovky '' -->
+                      series: [{% for value in hodl_staking_farming_stable %} {{ value.dollar_value }}, {% endfor %}],
+
+                      <!-- labels: ['Hodl', 'Staking', 'Farming', 'Stable'],-->
+                      <!-- U textu jsou uvozovky '' -->
+                      labels: [{% for value in hodl_staking_farming_stable %} '{{ value.division }}', {% endfor %}],
+
+                      title: {
+                        text: 'Graf hodl / staking / farming / stable',
+                        align: 'left',
+                        margin: 10,
+                        offsetX: 0,
+                        offsetY: 0,
+                        floating: false,
+                        style: {
+                          fontSize:  '14px',
+                          fontWeight:  'bold',
+                          fontFamily:  undefined,
+                          color:  '#263238'
+                        },
+                      },
+
+                      chart: {
+                      type: 'donut',
+
+                      <!--Sirka grafu-->
+                      width: '86%',
+                    },
+                    responsive: [{
+                      breakpoint: 480,
+                      options: {
+                        chart: {
+                          width: 200
+                        },
+                        legend: {
+                          position: 'bottom'
+                        }
+                      }
+                    }]
+                    };
+
+                    var chart = new ApexCharts(document.querySelector("#chart_grafy_2"), options);
+                    chart.render();
+                </script>
+            </section>
+        </div>
+
+        <div class="col-6 rigth">
+            <section class="center">
+
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Rozdělení</th>
+                        <th>Dolarová hodnota</th>
+                        <th>Procenta</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                       {% block content_grafy_2 %}
+                            {% for value in hodl_staking_farming_stable %}
+                                <tr>
+                                    <td>
+                                        {{ value.division }}
+                                    </td>
+                                    <td>
+                                        {{ value.dollar_value }}
+                                    </td>
+                                    <td>
+                                        0
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        {% endblock %}
+                    </tbody>
+                </table>
+
+            </section>
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-6 left">
+            <section class="center">
+                <div id="chart_grafy_3" class="size_grafy"></div>
+
+                <script>
+                    var options = {
+
+                      <!-- series: [1500, 1000, 500, 1000],-->
+                      <!-- U cisel nejsou uvozovky '' -->
+                      series: [{% for value in networks %} {{ value.dollar_value }}, {% endfor %}],
+
+                      <!-- labels: ['Hodl', 'Staking', 'Farming', 'Stable'],-->
+                      <!-- U textu jsou uvozovky '' -->
+                      labels: [{% for value in networks %} '{{ value.division }}', {% endfor %}],
+
+                      title: {
+                        text: 'Graf sítě',
+                        align: 'left',
+                        margin: 10,
+                        offsetX: 0,
+                        offsetY: 0,
+                        floating: false,
+                        style: {
+                          fontSize:  '14px',
+                          fontWeight:  'bold',
+                          fontFamily:  undefined,
+                          color:  '#263238'
+                        },
+                      },
+
+                      chart: {
+                      type: 'donut',
+
+                      <!--Sirka grafu-->
+                      width: '86%',
+                    },
+                    responsive: [{
+                      breakpoint: 480,
+                      options: {
+                        chart: {
+                          width: 200
+                        },
+                        legend: {
+                          position: 'bottom'
+                        }
+                      }
+                    }]
+                    };
+
+                    var chart = new ApexCharts(document.querySelector("#chart_grafy_3"), options);
+                    chart.render();
+                </script>
+            </section>
+        </div>
+
+        <div class="col-6 rigth">
+            <section class="center">
+
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Rozdělení</th>
+                        <th>Dolarová hodnota</th>
+                        <th>Procenta</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                       {% block content_grafy_3 %}
+                            {% for value in networks %}
+                                <tr>
+                                    <td>
+                                        {{ value.division }}
+                                    </td>
+                                    <td>
+                                        {{ value.dollar_value }}
+                                    </td>
+                                    <td>
+                                        0
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        {% endblock %}
+                    </tbody>
+                </table>
+
+            </section>
+        </div>
+
+    </div>
+
+{% endblock %}

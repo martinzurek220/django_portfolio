@@ -1,0 +1,167 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h5>Grafy</h5>
+
+    <div class="row">
+        <span class="link">
+            <a class="nav-link" href="{% url 'grafy' %}">Grafy</a>
+        </span>
+    </div>
+
+    {% block content_grafy_tabulky_1 %}
+        {% for category in sorted_blockchain_cex %}
+            <div class="row">
+                <div class="col-6 vycentruj">
+                    <p class="nazev_tabulky">
+                            {{ category.0.division }} assets:
+                    </p>
+                </div>
+            </div>
+
+             <div class="row">
+                <div class="col-6 vycentruj">
+                    <section class="center">
+
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>Rozdělení</th>
+                                <th>Množství</th>
+                                <th>Dolarová hodnota</th>
+                                <th>Procenta</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                               {% block content_grafy_tabulky_2 %}
+                                    {% for value in category %}
+                                        <tr>
+                                            <td>
+                                                {{ value.name }}
+                                            </td>
+                                            <td>
+                                                {{ value.amount }}
+                                            </td>
+                                            <td>
+                                                {{ value.dollar_value }}
+                                            </td>
+                                            <td>
+                                                0
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                {% endblock %}
+                            </tbody>
+                        </table>
+                    </section>
+                </div>
+            </div>
+        {% endfor %}
+    {% endblock %}
+
+
+    {% block content_grafy_tabulky_3 %}
+        {% for category in sorted_hodl_staking_farming_stable_assets %}
+            <div class="row">
+                <div class="col-6 vycentruj">
+                    <p class="nazev_tabulky">
+                            {{ category.0.division }} assets:
+                    </p>
+                </div>
+            </div>
+
+             <div class="row">
+                <div class="col-6 vycentruj">
+                    <section class="center">
+
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>Rozdělení</th>
+                                <th>Množství</th>
+                                <th>Dolarová hodnota</th>
+                                <th>Procenta</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                               {% block content_grafy_tabulky_4 %}
+                                    {% for value in category %}
+                                        <tr>
+                                            <td>
+                                                {{ value.name }}
+                                            </td>
+                                            <td>
+                                                {{ value.amount }}
+                                            </td>
+                                            <td>
+                                                {{ value.dollar_value }}
+                                            </td>
+                                            <td>
+                                                0
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                {% endblock %}
+                            </tbody>
+                        </table>
+                    </section>
+                </div>
+            </div>
+        {% endfor %}
+    {% endblock %}
+
+    {% block content_grafy_tabulky_5 %}
+        {% for network in sorted_networks_assets %}
+            <div class="row">
+                <div class="col-6 vycentruj">
+                    <p class="nazev_tabulky">
+                            {{ network.0.division }} assets:
+                    </p>
+                </div>
+            </div>
+
+             <div class="row">
+                <div class="col-6 vycentruj">
+                    <section class="center">
+
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>Rozdělení</th>
+                                <th>Množství</th>
+                                <th>Dolarová hodnota</th>
+                                <th>Procenta</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                               {% block content_grafy_tabulky_6 %}
+                                    {% for value in network %}
+                                        <tr>
+                                            <td>
+                                                {{ value.name }}
+                                            </td>
+                                            <td>
+                                                {{ value.amount }}
+                                            </td>
+                                            <td>
+                                                {{ value.dollar_value }}
+                                            </td>
+                                            <td>
+                                                0
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                {% endblock %}
+                            </tbody>
+                        </table>
+                    </section>
+                </div>
+            </div>
+        {% endfor %}
+    {% endblock %}
+
+{% endblock %}

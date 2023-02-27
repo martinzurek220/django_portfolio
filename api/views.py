@@ -10,13 +10,13 @@ from rest_framework.parsers import JSONParser
 from rest_framework import generics
 from rest_framework import mixins
 
-from viewer.models import Portfolio
+from viewer.models import Portfolio_assets
 
 from api.serializers import PortfolioSerializer
 
 
 # Create your views here.
 class Portfolio(viewsets.ModelViewSet):
-    queryset = Portfolio.objects.all()
+    queryset = Portfolio_assets.objects.all()
     serializer_class = PortfolioSerializer
     permission_classes = [permissions.IsAuthenticated]
