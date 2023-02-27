@@ -1,17 +1,18 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
 
-<h5>Staking page</h5>
 
-<div>
-    <div class="middle">
-        <section>
-            Ahoj<br>
-            .<br>
-            [{% for d in data %} {{ d.nazev_tokenu }}, {% endfor %}]
-        </section>
-    </div>
-</div>
+{% comment %}<!--<h5>Staking page</h5>-->
+
+
+<!--        <section>-->
+<!--            Ahoj<br>-->
+<!--            .<br>-->
+<!--            [{% for d in data %} {{ d.nazev_tokenu }}, {% endfor %}]-->
+<!--        </section>-->
+<!--    </div>-->
+<!--</div>-->
+{% endcomment %}
 
 {% endblock %}
