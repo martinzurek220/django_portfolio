@@ -40,9 +40,9 @@ urlpatterns = [
     path('fast_api/', fast_api, name='fast_api'),
     path('system/', system, name='system'),
     path('staking/', staking, name='staking'),
-
-
     # path('settings/', settings, name='settings'),
+
+    # App accounts
     # path('accounts/', include('accounts.urls')),
     path('accounts/signup/', SignUpView.as_view(), name='signup'),  # signup
     path('accounts/', include('django.contrib.auth.urls')),  # login, logout, password_change,...

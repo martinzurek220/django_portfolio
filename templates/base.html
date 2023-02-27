@@ -1,116 +1,97 @@
 <!doctype html>
 {% load static %}
-<html lang="cs">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Russo+One&family=Ubuntu:wght@500&display=swap" rel="stylesheet">
+        <title>
+            {% block title %}
+                Portfolio tracker
+            {% endblock %}
+        </title>
 
-    <title>
-        {% block title %}
-        Portfolio tracker
-        {% endblock %}
-    </title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+              integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+                crossorigin="anonymous">
+        </script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
-            crossorigin="anonymous">
-    </script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="{% static 'style.css' %}">
 
-    <link rel="stylesheet" href="{% static 'styleRa.css' %}">
-    <link rel="stylesheet" href="{% static 'login.css' %}">
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+        <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
-</head>
+    </head>
 
-<body>
-    <header>
+    <body>
+
         <nav class="navbar bg-body-tertiary normal-navbar">
             <div class="container">
-                <a class="navbar-brand" href="#">Portfolio tracker</a>
-
-                <div>
-                    <nav class="login">
-                        {% if request.user.is_authenticated %}
+                <a class="navbar-brand" href="#">
+                    <img src="https://getbootstrap.com/docs/5.3/assets/brand/bootstrap-logo.svg" alt="Logo" width="30"
+                         height="24" class="d-inline-block align-text-top">
+                    Portfolio tracker
+                </a>
+                <nav class="vetsi_pismo">
+                    {% if request.user.is_authenticated %}
                         {{ request.user.username }} <a href="{% url 'logout' %}">Logout</a>
-                        {% else %}
+                    {% else %}
                         <a href="{% url 'login' %}">Login</a>
-                        {% endif %}
-<!-- driv to byla trida "vetsi_pismo namisto "login"...  <a class="vetsi_pismo" href="{% url 'login' %}">Login</a>-->
-                    </nav>
-                </div>
+                    {% endif %}
+<!--                    <a class="vetsi_pismo" href="{% url 'login' %}">Login</a>-->
+                </nav>
             </div>
         </nav>
 
         <div class="container">
             <ul class="nav">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{% url 'prehled' %}">Přehled</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'grafy' %}">Další rozdělení</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'staking' %}">staking</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'farmy' %}">Farmy</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'ceny_tokenu' %}">Ceny tokenů</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'fast_api' %}">Rest API</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'system' %}">Systém</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled">Disabled</a>
-                </li>
-                {% comment %}
-                {% if request.user.is_authenticated %}
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{% url 'prehled' %}">Přehled</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'grafy' %}">Další rozdělení</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'staking' %}">Staking</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'farmy' %}">Farmy</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'ceny_tokenu' %}">Ceny tokenů</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'fast_api' %}">Rest API</a>
+              </li>
+               <li class="nav-item">
+                <a class="nav-link" href="{% url 'system' %}">Systém</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled">Disabled</a>
+              </li>
+              {% comment %}
+              {% if request.user.is_authenticated %}
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'settings' %}">Settings</a>
                 </li>
-                {% endif %}
-                {% endcomment %}
+              {% endif %}
+              {% endcomment %}
             </ul>
         </div>
-    </header>
-    <div class="container">
-        {% block content %}
-        <!-- Tady se ulozi html kod na konkretni strance  -->
-        {% endblock %}
-    </div>
 
+        <div class="container">
+            {% block content %}
+                <!-- Tady se ulozi html kod na konkretni strance  -->
+            {% endblock %}
+        </div>
 
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/charts.css/dist/charts.min.css">
 
-
-    {% comment %}
-    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/charts.css/dist/charts.min.css"> -->
-
-    {% endcomment %}
-</body>
-
-<footer class="footer_container">
-    <div class="footer_contakt">
-        <h6>Kontakt</h6>
-    </div>
-    <div class="about_me">
-        <h6>O mě</h6>
-    </div>
-</footer>
+    </body>
 </html>
-
-

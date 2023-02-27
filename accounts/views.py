@@ -4,7 +4,7 @@ from django.contrib.auth.forms import *
 from django.views import generic
 from django.urls import reverse_lazy
 
-STATIC_URL = 'static/'
+
 # Create your views here.
 
 # Prihlasovaci formular
