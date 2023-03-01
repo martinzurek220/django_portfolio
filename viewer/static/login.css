@@ -1,0 +1,39 @@
+.login_center {
+    margin-top: 60px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-family: "Century Gothic" bolt;
+    color: #0d6efd;
+}
+input {
+    margin-top: 10px;
+    margin-left: 10px;
+    background: rgb(62,228,150);
+    border-radius: 5px;
+}
+input[type="submit"] {
+    padding-left: 7px;
+    padding-right: 7px;
+
+}
+
+.login_form {
+    margin: 30px;
+    font-size: 20px;
+    /*font-family: Ubuntu, sans-serif;*/
+    text-shadow: #0d6efd;
+}
+button {
+    padding: 15px 20px;
+    background: #0d6efd;
+    color: whitesmoke;
+    border-radius: 8px;
+
+}
+label {
+    color: darkred;
+    padding: 20px;
+}
+
+
+

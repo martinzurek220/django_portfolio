@@ -96,7 +96,6 @@
                       <!-- labels: ['Apple', 'Mango', 'Orange', 'Watermelon', 'a'],-->
                       <!-- U textu jsou uvozovky '' -->
                       labels: [{% for my_token in my_tokens %} '{{ my_token.name }}', {% endfor %}],
-
                       title: {
                         text: 'Graf portfolia',
                         align: 'left',
@@ -111,10 +110,8 @@
                           color:  '#263238'
                         },
                       },
-
                       chart: {
                       type: 'donut',
-
                       <!--Sirka grafu-->
                       width: '86%',
                     },
