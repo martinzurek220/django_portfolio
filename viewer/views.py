@@ -168,27 +168,25 @@ def grafy_tabulky(request):
 
 
 def staking(request):
-    data = Portfolio_assets.objects.all()
-    context = {'data': data}
-    return render(request, 'staking.html', context)
+    return render(request, 'vystavba.html')
 
 
-def farmy(request):
-    return render(request, 'farmy.html')
+def farming(request):
+    return render(request, 'vystavba.html')
 
 
 def ceny_tokenu(request):
-    return render(request, 'ceny_tokenu.html')
+    return render(request, 'vystavba.html')
 
 
 def fast_api(request):
-    return render(request, 'fast_api.html')
+    return render(request, 'vystavba.html')
 
 
 def system(request):
-    return render(request, 'system.html')
+    return render(request, 'vystavba.html')
 
 
 def settings(request):
-    return render(request, 'settings.html')
+    return render(request, 'vystavba.html')
 
