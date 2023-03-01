@@ -63,8 +63,8 @@ class PrehledView(View):
         for my_token in my_tokens:
             my_token.percentages = round(((100 * my_token.dollar_value) / dollar_value), 1)
 
-        years_line_chart = [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 2050]
-        values_line_chart = [30, 40, 35, 50, 49, 60, 70, 91, 60]
+        years_line_chart = [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 1, 2]
+        values_line_chart = [1840, 1930, 1900, 1920, 1970, 1950, 2000, 2150, 2200, 2300, 2520, 2850]
 
         context = {
             'my_tokens': my_tokens,

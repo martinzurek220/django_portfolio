@@ -19,6 +19,7 @@
             </section>
         </div>
 
+        {% comment %}
         <div class="col-3 middle-middle">
             <section class="size_4_dlazdice">
 
@@ -36,6 +37,8 @@
 
             </section>
         </div>
+        {% endcomment %}
+
     </div>
 
 
@@ -147,7 +150,11 @@
                     <tr>
                         <th>Pořadí</th>
                         <th>Název tokenu</th>
+
+                        {% comment %}
                         <th>Cena</th>
+                        {% endcomment %}
+
                         <th>Množství</th>
                         <th>Dolarová hodnota</th>
                         <th>Procenta</th>
@@ -164,9 +171,13 @@
                                     <td>
                                         {{ my_token.name }}
                                     </td>
+
+                                    {% comment %}
                                     <td>
                                         0
                                     </td>
+                                    {% endcomment %}
+
                                     <td>
                                         {{ my_token.amount }}
                                     </td>
