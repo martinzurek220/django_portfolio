@@ -34,7 +34,7 @@ V části Grafy je zobrazeno další rozdělení portfolia podle dolarové hodno
 V části Grafy - Tabulky jsou zobrazeny tabulky, ve kterých jsou zobrazeny tokeny roztříděné podle kategorií v části grafy. Do této oblasti se uživatel dostane v záložce
 Grafy, pokud klikne vpravo nahoře na link ```Tabulky```. 
 
-![obrazek](https://user-images.githubusercontent.com/106346624/222255074-17f3f722-200f-46d5-83f7-b8144f1b0a9b.png)
+![obrazek](https://user-images.githubusercontent.com/106346624/222256558-7157a347-d21f-4450-9f70-64d1c622ab87.png)
 
 ### Záložky Staking, Farming, Ceny tokenů, Rest API a Systém
 Tyto záložky jsou momentálně ve výstavbě a pracuje se na nich. 
