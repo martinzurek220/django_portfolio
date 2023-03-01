@@ -39,4 +39,7 @@ Grafy, pokud klikne vpravo nahoře na link ```Tabulky```.
 ### Záložky Staking, Farming, Ceny tokenů, Rest API a Systém
 Tyto záložky jsou momentálně ve výstavbě a pracuje se na nich. 
 
+![obrazek](https://user-images.githubusercontent.com/106346624/222256947-fd627680-748a-4d57-89e9-ef1feb696107.png)
+
+
 ## Závěr
