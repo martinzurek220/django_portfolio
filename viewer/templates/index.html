@@ -14,11 +14,12 @@
             <section class="size_4_dlazdice">
 
                 <span>Celková dolarová hodnota:</span><br>
-                <span class="vetsi_pismo"><b>{{ dolarova_hodnota }} $</b></span><br>
+                <span class="vetsi_pismo"><b>{{ dollar_value }} $</b></span><br>
 
             </section>
         </div>
 
+        {% comment %}
         <div class="col-3 middle-middle">
             <section class="size_4_dlazdice">
 
@@ -36,6 +37,8 @@
 
             </section>
         </div>
+        {% endcomment %}
+
     </div>
 
 
@@ -91,11 +94,11 @@
 
                       <!-- series: [44, 55, 41, 17, 15, 1, 5, 6, 8, 7],-->
                       <!-- U cisel nejsou uvozovky '' -->
-                      series: [{% for muj_token in moje_tokeny %} {{ muj_token.dolarova_hodnota }}, {% endfor %}],
+                      series: [{% for my_token in my_tokens %} {{ my_token.dollar_value }}, {% endfor %}],
 
                       <!-- labels: ['Apple', 'Mango', 'Orange', 'Watermelon', 'a'],-->
                       <!-- U textu jsou uvozovky '' -->
-                      labels: [{% for muj_token in moje_tokeny %} '{{ muj_token.nazev_tokenu }}', {% endfor %}],
+                      labels: [{% for my_token in my_tokens %} '{{ my_token.name }}', {% endfor %}],
 
                       title: {
                         text: 'Graf portfolia',
@@ -147,6 +150,12 @@
                     <tr>
                         <th>Pořadí</th>
                         <th>Název tokenu</th>
+
+                        {% comment %}
+                        <th>Cena</th>
+                        {% endcomment %}
+
+                        <th>Množství</th>
                         <th>Dolarová hodnota</th>
                         <th>Procenta</th>
                     </tr>
@@ -154,19 +163,29 @@
 
                     <tbody>
                         {% block content_3 %}
-                            {% for muj_token in moje_tokeny %}
+                            {% for my_token in my_tokens %}
                                 <tr>
                                     <td>
-                                        {{ muj_token.poradi }}
+                                        {{ my_token.count }}
                                     </td>
                                     <td>
-                                        {{ muj_token.nazev_tokenu }}
+                                        {{ my_token.name }}
+                                    </td>
+
+                                    {% comment %}
+                                    <td>
+                                        0
+                                    </td>
+                                    {% endcomment %}
+
+                                    <td>
+                                        {{ my_token.amount }}
                                     </td>
                                     <td>
-                                        {{ muj_token.dolarova_hodnota }}
+                                        {{ my_token.dollar_value }}
                                     </td>
                                     <td>
-                                        {{ muj_token.procenta }} %
+                                        {{ my_token.percentages }}
                                     </td>
                                 </tr>
                             {% endfor %}
@@ -179,19 +198,6 @@
         <div class="col-6 rigth">
             <section>
                 Poznámky:<br>
-                <br>
-                <br>
-                <br>
-                <br>
-            </section>
-        </div>
-    </div>
-    <div>
-        <div class="middle">
-            <section>
-                <br>
-                <br>
-                <br>
                 <br>
                 <br>
                 <br>

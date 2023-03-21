@@ -16,11 +16,11 @@ def hello(request):
 #
 #     labels = []
 #     count = 0
-#     for muj_token in moje_tokeny:
-#         labels.append(muj_token.nazev_tokenu)
+#     for my_token in moje_tokeny:
+#         labels.append my_token.nazev_tokenu)
 #
 #         count += 1
-#         muj_token.poradi = count
+#         my_token.poradi = count
 #
 #     # labels = ['a', 'b', 'c', 'd', 'e']
 #     # values = [10, 10, 10, 10, 10, 10, 10, 10, 10, 10]
@@ -41,31 +41,36 @@ class PrehledView(View):
 
     def get(self, request):
 
-        moje_tokeny = Portfolio.objects.all()  # Vytvori list objektu [obj1, obj2, obj3, ...]
+        if request.user.is_authenticated:
+            my_tokens = Portfolio_assets.objects.filter(user=request.user)  # Vytvori list objektu [obj1, obj2, obj3, ...]
+
+        else:
+            # Neprihlasi se, ale jen vytahne data od uzivatele demo
+            my_tokens = Portfolio_assets.objects.filter(user=User.objects.get(username="demo"))
 
         count = 0
-        dolarova_hodnota = 0
+        dollar_value = 0
 
         # Pridani poradi a vypocitani dolarove hodnoty
-        for muj_token in moje_tokeny:
+        for my_token in my_tokens:
 
             count += 1
-            muj_token.poradi = count
+            my_token.count = count
 
-            dolarova_hodnota += muj_token.dolarova_hodnota
+            dollar_value += my_token.dollar_value
 
-        # Vypocet procent
-        for muj_token in moje_tokeny:
-            muj_token.procenta = round(((100 * muj_token.dolarova_hodnota) / dolarova_hodnota), 1)
+        # TODO Vypocet procent spocitat ve scraperu, tady jen zobrazit
+        for my_token in my_tokens:
+            my_token.percentages = round(((100 * my_token.dollar_value) / dollar_value), 1)
 
-        years_line_chart = [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 2050]
-        values_line_chart = [30, 40, 35, 50, 49, 60, 70, 91, 60]
+        years_line_chart = [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 1, 2]
+        values_line_chart = [1840, 1930, 1900, 1920, 1970, 1950, 2000, 2150, 2200, 2300, 2520, 2850]
 
         context = {
-            'moje_tokeny': moje_tokeny,
+            'my_tokens': my_tokens,
             'years_line_chart': years_line_chart,
             'values_line_chart': values_line_chart,
-            'dolarova_hodnota': dolarova_hodnota,
+            'dollar_value': dollar_value,
         }
 
         return render(request, 'index.html', context)
@@ -73,36 +78,115 @@ class PrehledView(View):
 
 def grafy(request):
 
-    labels = ['Blockchain', 'Cex']
-    values = [4000, 1000]
+    if request.user.is_authenticated:
+        blockchain_cex = Dollar_value.objects.filter(category='blockchain_cex').filter(user=request.user)
+        hodl_staking_farming_stable = Dollar_value.objects.filter(category='hodl_staking_farming_stable')\
+            .filter(user=request.user)
+        networks = Dollar_value.objects.filter(category='network').filter(user=request.user)
+    else:
+        blockchain_cex = Dollar_value.objects.filter(category='blockchain_cex')\
+            .filter(user=User.objects.get(username="demo"))
+        hodl_staking_farming_stable = Dollar_value.objects.filter(category='hodl_staking_farming_stable')\
+            .filter(user=User.objects.get(username="demo"))
+        networks = Dollar_value.objects.filter(category='network').filter(user=User.objects.get(username="demo"))
 
     context = {
-        'labels': labels,
-        'values': values,
+        'blockchain_cex': blockchain_cex,
+        'hodl_staking_farming_stable': hodl_staking_farming_stable,
+        'networks': networks
     }
 
-    return render(request, 'grafy.html', context)
+    return render(request, 'grafy_grafy.html', context)
 
-# def staking(request):
-#     return render(request, 'staking.html')
+
+def grafy_tabulky(request):
+
+    category_blockchain_cex_name = []
+    category_hodl_staking_farming_stable_name = []
+    network_name = []
+    sorted_blockchain_cex = []
+    sorted_hodl_staking_farming_stable_assets = []
+    sorted_networks_assets = []
+
+    if request.user.is_authenticated:
+        blockchain_cex = Blockchain_Cex_assets.objects.all().filter(user=request.user)
+        hodl_staking_farming_stable = Hodl_Staking_Farming_Stable_assets.objects.all().filter(user=request.user)
+        networks = Networks_assets.objects.all().filter(user=request.user)
+    else:
+        blockchain_cex = Blockchain_Cex_assets.objects.all()\
+            .filter(user=User.objects.get(username="demo"))
+        hodl_staking_farming_stable = Hodl_Staking_Farming_Stable_assets.objects.all() \
+            .filter(user=User.objects.get(username="demo"))
+        networks = Networks_assets.objects.all()\
+            .filter(user=User.objects.get(username="demo"))
+
+    for category in blockchain_cex:
+        if category.division not in category_blockchain_cex_name:
+            category_blockchain_cex_name.append(category.division)
+
+    for i in range(len(category_blockchain_cex_name)):
+        sorted_blockchain_cex.append([])
+
+    for category in blockchain_cex:
+        for i in range(len(category_blockchain_cex_name)):
+            if category.division == category_blockchain_cex_name[i]:
+                sorted_blockchain_cex[i].append(category)
+
+    for category in hodl_staking_farming_stable:
+        if category.division not in category_hodl_staking_farming_stable_name:
+            category_hodl_staking_farming_stable_name.append(category.division)
+
+    for i in range(len(category_hodl_staking_farming_stable_name)):
+        sorted_hodl_staking_farming_stable_assets.append([])
+
+    for category in hodl_staking_farming_stable:
+        for i in range(len(category_hodl_staking_farming_stable_name)):
+            if category.division == category_hodl_staking_farming_stable_name[i]:
+                sorted_hodl_staking_farming_stable_assets[i].append(category)
+
+    for network in networks:
+        if network.division not in network_name:
+            network_name.append(network.division)
+
+    for i in range(len(network_name)):
+        sorted_networks_assets.append([])
+
+    for network in networks:
+        for i in range(len(network_name)):
+            if network.division == network_name[i]:
+                sorted_networks_assets[i].append(network)
+
+    print(sorted_networks_assets)
+
+    context = {
+        'sorted_blockchain_cex': sorted_blockchain_cex,
+        'sorted_hodl_staking_farming_stable_assets': sorted_hodl_staking_farming_stable_assets,
+        'sorted_networks_assets': sorted_networks_assets,
+    }
+
+    return render(request, 'grafy_tabulky.html', context)
+
 
 def staking(request):
-    data = Portfolio.objects.all()
-    context = {'data': data}
-    return render(request, 'staking.html', context)
+    return render(request, 'vystavba.html')
 
-def farmy(request):
-    return render(request, 'farmy.html')
+
+def farming(request):
+    return render(request, 'vystavba.html')
+
 
 def ceny_tokenu(request):
-    return render(request, 'ceny_tokenu.html')
+    return render(request, 'vystavba.html')
+
 
 def fast_api(request):
-    return render(request, 'fast_api.html')
+    return render(request, 'vystavba.html')
+
 
 def system(request):
-    return render(request, 'system.html')
+    return render(request, 'vystavba.html')
+
 
 def settings(request):
-    return render(request, 'settings.html')
+    return render(request, 'vystavba.html')
 
